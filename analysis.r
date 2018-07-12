@@ -14,7 +14,7 @@ theme_set(theme_bw())
 #
 # Assumes that the dataset contains the following:
 #
-# depvar => dependent variable, trying to predict increase (assume ratio scaled here)
+# depvar => dependent variable (assume ratio scaled here)
 # bin-indvar => binary independent variable: categorial, bin-indvar-1 = True, bin-indvar-0 = False
 # cont-indvar-A => continuous independent variable A: ratio scale
 # cont-indvar-B => continuous independent variable B: ratio scale
