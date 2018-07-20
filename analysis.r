@@ -22,7 +22,6 @@ theme_set(theme_bw())
 # Also assume that there are zero values/NAs for the dependent variable
 
 setwd("") # Insert path to working directory
-source("helpers.R")
 d = read.csv(file="") # Insert csv filename for data
 summary(d)
 head(d)
