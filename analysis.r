@@ -43,49 +43,49 @@ d_only_zero <- d %>%
 nrow(d_only_zero)
 
 # Make table consisting only of bin-indvar-1 rows
-bin-indvar-1_table <- d %>%
+bin-indvar-1-table <- d %>%
   filter(bin-indvar-1 == 1)
-bin-indvar-1_table$depvar[is.na(bin-indvar-1_table$depvar)] <- 0 # Change NAs in depvar column to 0
-nrow(bin-indvar-1_table)
+bin-indvar-1-table$depvar[is.na(bin-indvar-1-table$depvar)] <- 0 # Change NAs in depvar column to 0
+nrow(bin-indvar-1-table)
 
 # Make table of bin-indvar-1 excluding zeros
-bin-indvar-1_no_zero <- bin-indvar-1_table %>%
+bin-indvar-1-no-zero <- bin-indvar-1-table %>%
   filter(depvar != 0)
-nrow(bin-indvar-1_no_zero)
+nrow(bin-indvar-1-no-zero)
 
 # Make table of bin-indvar-1 only zeros
-bin-indvar-1_only_zero <- bin-indvar-1_table %>%
+bin-indvar-1-only-zero <- bin-indvar-1-table %>%
   filter(depvar == 0)
-nrow(bin-indvar-1_only_zero)
+nrow(bin-indvar-1-only-zero)
 
 # Make table consisting only of bin-indvar-0 rows
-bin-indvar-0_table <- d %>%
+bin-indvar-0-table <- d %>%
   filter(bin-indvar-1 == 0)
-bin-indvar-0_table$depvar[is.na(bin-indvar-0_table$depvar)] <- 0 # Change NAs in depvar column to 0
-nrow(bin-indvar-0_table)
+bin-indvar-0-table$depvar[is.na(bin-indvar-0-table$depvar)] <- 0 # Change NAs in depvar column to 0
+nrow(bin-indvar-0-table)
 
 # Make table of bin-indvar-0 excluding zeros
-bin-indvar-0_no_zero <- bin-indvar-0_table %>%
+bin-indvar-0-no-zero <- bin-indvar-0-table %>%
   filter(depvar != 0)
-nrow(bin-indvar-0_no_zero)
+nrow(bin-indvar-0-no-zero)
 
 # Make table of bin-indvar-0 only zeros
-bin-indvar-0_only_zero <- bin-indvar-0_table %>%
+bin-indvar-0-only-zero <- bin-indvar-0-table %>%
   filter(depvar == 0)
-nrow(bin-indvar-0_only_zero)
+nrow(bin-indvar-0-only-zero)
 
 # Get max, min, mean and median depvar from each subset:
 summary(d_no_zero)
-summary(bin-indvar-1_no_zero)
-summary(bin-indvar-0_no_zero)
+summary(bin-indvar-1-no-zero)
+summary(bin-indvar-0-no-zero)
 
 # Get st. dev. and IQR for depvar of each subset:
 sd(d_no_zero$depvar)
-sd(bin-indvar-1_no_zero$depvar)
-sd(bin-indvar-0_no_zero$depvar)
+sd(bin-indvar-1-no-zero$depvar)
+sd(bin-indvar-0-no-zero$depvar)
 IQR(d_no_zero$depvar)
-IQR(bin-indvar-1_no_zero$depvar)
-IQR(bin-indvar-0_no_zero$depvar)
+IQR(bin-indvar-1-no-zero$depvar)
+IQR(bin-indvar-0-no-zero$depvar)
 
 # Make density plot of depvar for each subset:
 limit <- 1 # change this for data
@@ -99,7 +99,7 @@ d_depvar_dens_plot <- ggplot(d_no_zero, aes(x=depvar)) +
         axis.title=element_text(size=22,face="bold"))
 d_depvar_dens_plot
 
-bin-indvar-1_depvar_dens_plot <- ggplot(bin-indvar-1_no_zero, aes(x=depvar)) + 
+bin-indvar-1-depvar-dens-plot <- ggplot(bin-indvar-1-no-zero, aes(x=depvar)) + 
   geom_density() +
   scale_x_continuous(limits = c(0, limit))  + 
   geom_vline(aes(xintercept=mean(depvar)), color="red", linetype="dashed", size=1) +
@@ -107,9 +107,9 @@ bin-indvar-1_depvar_dens_plot <- ggplot(bin-indvar-1_no_zero, aes(x=depvar)) +
   labs(x="depvar", y = "Density") + 
   theme(plot.title = element_text(hjust = 0.5, size=24), axis.text=element_text(size=22),
         axis.title=element_text(size=22,face="bold"))
-bin-indvar-1_depvar_dens_plot
+bin-indvar-1-depvar-dens-plot
 
-bin-indvar-0_depvar_dens_plot <- ggplot(bin-indvar-0_no_zero, aes(x=depvar)) + 
+bin-indvar-0-depvar-dens-plot <- ggplot(bin-indvar-0-no-zero, aes(x=depvar)) + 
   geom_density() +
   scale_x_continuous(limits = c(0, limit))  + 
   geom_vline(aes(xintercept=mean(depvar)), color="red", linetype="dashed", size=1) +
@@ -117,22 +117,22 @@ bin-indvar-0_depvar_dens_plot <- ggplot(bin-indvar-0_no_zero, aes(x=depvar)) +
   labs(x="depvar", y = "Density") + 
   theme(plot.title = element_text(hjust = 0.5, size=24), axis.text=element_text(size=22),
         axis.title=element_text(size=22,face="bold"))
-bin-indvar-0_depvar_dens_plot
+bin-indvar-0-depvar-dens-plot
 
 # Compute skewness of each subset
 skewness(d_no_zero$depvar)
-skewness(bin-indvar-1_no_zero$depvar)
-skewness(bin-indvar-0_no_zero$depvar)
+skewness(bin-indvar-1-no-zero$depvar)
+skewness(bin-indvar-0-no-zero$depvar)
 
 # t-test for difference in depvar between bin-indvar-1 and bin-indvar-0
 d_no_zero$log_depvar <- log(d_no_zero$depvar) # create log transform column of depvar
-bin-indvar-1_no_zero$log_depvar <- log(bin-indvar-1_no_zero$depvar)
-bin-indvar-0_no_zero$log_depvar <- log(bin-indvar-0_no_zero$depvar)
+bin-indvar-1-no-zero$log_depvar <- log(bin-indvar-1-no-zero$depvar)
+bin-indvar-0-no-zero$log_depvar <- log(bin-indvar-0-no-zero$depvar)
 
-t.test(bin-indvar-1_no_zero$log_depvar, bin-indvar-0_no_zero$log_depvar, alternative = "greater")
+t.test(bin-indvar-1-no-zero$log_depvar, bin-indvar-0-no-zero$log_depvar, alternative = "greater")
 
 # Create scatterplots of cont-indvar-A vs. log_depvar
-cont-indvar-A_scatter_bin-indvar-1 <- ggplot(bin-indvar-1_no_zero, aes(x=cont-indvar-A, y=log_depvar)) + 
+cont-indvar-A_scatter_bin-indvar-1 <- ggplot(bin-indvar-1-no-zero, aes(x=cont-indvar-A, y=log_depvar)) + 
   geom_point(shape = 20, size = 1) +
   stat_smooth(method = lm) +
   labs(x="cont-indvar-A", y = "Log of depvar") + 
@@ -140,7 +140,7 @@ cont-indvar-A_scatter_bin-indvar-1 <- ggplot(bin-indvar-1_no_zero, aes(x=cont-in
         axis.title=element_text(size=22,face="bold"))
 cont-indvar-A_scatter_bin-indvar-1
 
-cont-indvar-A_scatter_bin-indvar-0 <- ggplot(bin-indvar-0_no_zero, aes(x=cont-indvar-A, y=log_depvar)) + 
+cont-indvar-A_scatter_bin-indvar-0 <- ggplot(bin-indvar-0-no-zero, aes(x=cont-indvar-A, y=log_depvar)) + 
   geom_point(shape = 20, size = 1) +
   stat_smooth(method = lm) +
   labs(x="cont-indvar-A", y = "Log of depvar") + 
@@ -152,36 +152,36 @@ cont-indvar-A_scatter_bin-indvar-0
 # Create bin-indvar-1 set excluding outliers
 outlier_threshold_upper <- 20 # change according to data
 outlier_threshold_lower <- 12 # change according to data
-bin-indvar-1_exclude_outliers <- bin-indvar-1_no_zero[bin-indvar-1_no_zero$log_depvar<outlier_threshold_upper & bin-indvar-1_no_zero$log_depvar>outlier_threshold_lower,]
+bin-indvar-1-exclude-outliers <- bin-indvar-1-no-zero[bin-indvar-1-no-zero$log_depvar<outlier_threshold_upper & bin-indvar-1-no-zero$log_depvar>outlier_threshold_lower,]
 
 # Test correlation of cont-indvar-A and depvar in bin-indvar-1 set
-cor(bin-indvar-1_no_zero$cont-indvar-A, bin-indvar-1_no_zero$log_depvar)
-cor(bin-indvar-1_exclude_outliers$cont-indvar-A, bin-indvar-1_exclude_outliers$log_depvar)
+cor(bin-indvar-1-no-zero$cont-indvar-A, bin-indvar-1-no-zero$log_depvar)
+cor(bin-indvar-1-exclude-outliers$cont-indvar-A, bin-indvar-1-exclude-outliers$log_depvar)
 
 # Simple density plots for cont-indvar-B variable in each subset:
 plot(density(d_no_zero$cont-indvar-B), main=NA, xlab="cont-indvar-B", cex.lab=2, cex.axis=2)
-plot(density(bin-indvar-1_no_zero$cont-indvar-B), main=NA, xlab="cont-indvar-B", cex.lab=2, cex.axis=2)
-plot(density(bin-indvar-0_no_zero$cont-indvar-B), main=NA, xlab="cont-indvar-B", cex.lab=2, cex.axis=2)
+plot(density(bin-indvar-1-no-zero$cont-indvar-B), main=NA, xlab="cont-indvar-B", cex.lab=2, cex.axis=2)
+plot(density(bin-indvar-0-no-zero$cont-indvar-B), main=NA, xlab="cont-indvar-B", cex.lab=2, cex.axis=2)
 
 # Get modes for cont-indvar-B and depvar in split of bin-indvar-0 set:
 cont-indvar-B_threshold <- 75 # change according to data
-bin-indvar-0_longer <- bin-indvar-0_no_zero[bin-indvar-0_no_zero$cont-indvar-B>=cont-indvar-B_threshold,]
-get.mode(bin-indvar-0_longer$cont-indvar-B)
-get.mode(bin-indvar-0_longer$depvar)
+bin-indvar-0-longer <- bin-indvar-0-no-zero[bin-indvar-0-no-zero$cont-indvar-B>=cont-indvar-B_threshold,]
+get.mode(bin-indvar-0-longer$cont-indvar-B)
+get.mode(bin-indvar-0-longer$depvar)
 # Get modes for cont-indvar-B and depvar, longer-time bin-indvar-1 set:
-bin-indvar-1_longer <- bin-indvar-1_no_zero[bin-indvar-1_no_zero$cont-indvar-B>=cont-indvar-B_threshold,]
-get.mode(bin-indvar-1_longer$cont-indvar-B)
-get.mode(bin-indvar-1_longer$depvar)
+bin-indvar-1-longer <- bin-indvar-1-no-zero[bin-indvar-1-no-zero$cont-indvar-B>=cont-indvar-B_threshold,]
+get.mode(bin-indvar-1-longer$cont-indvar-B)
+get.mode(bin-indvar-1-longer$depvar)
 # Get modal depvar increase:
-modal_increase <- (get.mode(bin-indvar-1_longer$depvar) / get.mode(bin-indvar-1_longer$cont-indvar-B)) - (get.mode(bin-indvar-0_longer$depvar) / get.mode(bin-indvar-0_longer$cont-indvar-B))
+modal_increase <- (get.mode(bin-indvar-1-longer$depvar) / get.mode(bin-indvar-1-longer$cont-indvar-B)) - (get.mode(bin-indvar-0-longer$depvar) / get.mode(bin-indvar-0-longer$cont-indvar-B))
 modal_increase
 # Get medians:
-median(bin-indvar-0_longer$cont-indvar-B)
-median(bin-indvar-0_longer$depvar)
-median(bin-indvar-1_longer$cont-indvar-B)
-median(bin-indvar-1_longer$depvar)
+median(bin-indvar-0-longer$cont-indvar-B)
+median(bin-indvar-0-longer$depvar)
+median(bin-indvar-1-longer$cont-indvar-B)
+median(bin-indvar-1-longer$depvar)
 # Get median depvar increase:
-median_increase <- (median(bin-indvar-1_longer$depvar) / median(bin-indvar-1_longer$cont-indvar-B)) - (median(bin-indvar-0_longer$depvar) / median(bin-indvar-0_longer$cont-indvar-B))
+median_increase <- (median(bin-indvar-1-longer$depvar) / median(bin-indvar-1-longer$cont-indvar-B)) - (median(bin-indvar-0-longer$depvar) / median(bin-indvar-0-longer$cont-indvar-B))
 median_increase
 
 # If a linear regression is appropriate:
@@ -223,15 +223,15 @@ summary(no_tails_model_raw)
 plot(no_tails_model,which=2,cex.lab=2, cex.axis=2)
 
 # Generate correlation matrices:
-cor(bin-indvar-1_no_zero$cont-indvar-A, bin-indvar-1_no_zero$cont-indvar-B)
-plot(bin-indvar-1_no_zero$cont-indvar-A, bin-indvar-1_no_zero$cont-indvar-B)
+cor(bin-indvar-1-no-zero$cont-indvar-A, bin-indvar-1-no-zero$cont-indvar-B)
+plot(bin-indvar-1-no-zero$cont-indvar-A, bin-indvar-1-no-zero$cont-indvar-B)
 
 # Investigating subset of data with only NAs for depvar:
 # Histogram for only zeros
-hist(bin-indvar-1_only_zero$cont-indvar-A, freq=F, main=NA, xlab="cont-indvar-A", cex.lab=2, cex.axis=2, xlim=c(-1.5,20), ylim=c(0,15)) # change lims according to data
-lines(density(bin-indvar-1_only_zero$cont-indvar-A), col="red")
-hist(bin-indvar-1_no_zero$cont-indvar-A, freq=F, main=NA, xlab="cont-indvar-A", cex.lab=2, cex.axis=2, xlim=c(-1.5,20), ylim=c(0,15)) # change lims according to data
-lines(density(bin-indvar-1_no_zero$cont-indvar-A), col="red")
+hist(bin-indvar-1-only-zero$cont-indvar-A, freq=F, main=NA, xlab="cont-indvar-A", cex.lab=2, cex.axis=2, xlim=c(-1.5,20), ylim=c(0,15)) # change lims according to data
+lines(density(bin-indvar-1-only-zero$cont-indvar-A), col="red")
+hist(bin-indvar-1-no-zero$cont-indvar-A, freq=F, main=NA, xlab="cont-indvar-A", cex.lab=2, cex.axis=2, xlim=c(-1.5,20), ylim=c(0,15)) # change lims according to data
+lines(density(bin-indvar-1-no-zero$cont-indvar-A), col="red")
 
 # Polynomial regression incl zeros
 model_incl_zeros <-lm(depvar ~ bin-indvar-1 + polym(cont-indvar-A, degree=3) + polym(cont-indvar-B, degree=3), data = d)
